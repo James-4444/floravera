@@ -106,4 +106,5 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['change_password'])){
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php include __DIR__.'/partials/chatbot_widget.php'; ?>
 </body></html>

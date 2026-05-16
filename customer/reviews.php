@@ -126,4 +126,5 @@ function setRating(n){
   }
 }
 </script>
+<?php include __DIR__.'/partials/chatbot_widget.php'; ?>
 </body></html>

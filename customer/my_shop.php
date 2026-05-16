@@ -450,5 +450,6 @@ function previewImage(input) {
     reader.readAsDataURL(input.files[0]);
 }
 </script>
+<?php include __DIR__.'/partials/chatbot_widget.php'; ?>
 </body>
 </html>

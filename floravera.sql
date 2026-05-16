@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2026 at 06:11 AM
+-- Generation Time: May 16, 2026 at 03:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,26 +65,27 @@ CREATE TABLE `products` (
   `category` enum('flowers','bouquets','handicrafts','giftsets') NOT NULL DEFAULT 'flowers',
   `emoji` varchar(10) DEFAULT '?',
   `badge` varchar(20) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `vendor_id`, `name`, `description`, `price`, `stock`, `category`, `emoji`, `badge`, `created_at`) VALUES
-(1, 1, 'Rose bouquet', NULL, 350.00, 15, 'bouquets', '🌹', 'new', '2026-05-05 03:41:04'),
-(2, 2, 'Woven basket', NULL, 220.00, 20, 'handicrafts', '🧺', NULL, '2026-05-05 03:41:04'),
-(3, 1, 'Sunflower wrap', NULL, 280.00, 12, 'bouquets', '🌻', NULL, '2026-05-05 03:41:04'),
-(4, 2, 'Macramé decor', NULL, 450.00, 8, 'handicrafts', '🪴', NULL, '2026-05-05 03:41:04'),
-(5, 1, 'Mixed blooms', NULL, 180.00, 5, 'flowers', '🌸', 'low', '2026-05-05 03:41:04'),
-(6, 2, 'Gift hamper', NULL, 650.00, 10, 'giftsets', '🎁', 'new', '2026-05-05 03:41:04'),
-(7, 1, 'Orchid arrangement', NULL, 520.00, 7, 'flowers', '🌺', NULL, '2026-05-05 03:41:04'),
-(8, 1, 'Daisy bouquet', NULL, 210.00, 18, 'bouquets', '🌼', NULL, '2026-05-05 03:41:04'),
-(9, 2, 'Beaded keychain', NULL, 95.00, 30, 'handicrafts', '📿', NULL, '2026-05-05 03:41:04'),
-(10, 2, 'Macramé wall art', NULL, 450.00, 6, 'handicrafts', '🎨', NULL, '2026-05-05 03:41:04'),
-(11, 1, 'Tulip bunch', NULL, 320.00, 14, 'flowers', '🌷', 'new', '2026-05-05 03:41:04'),
-(12, 2, 'Holiday gift set', NULL, 780.00, 9, 'giftsets', '🎀', NULL, '2026-05-05 03:41:04');
+INSERT INTO `products` (`id`, `vendor_id`, `name`, `description`, `price`, `stock`, `category`, `emoji`, `badge`, `created_at`, `image`) VALUES
+(1, 1, 'Rose bouquet', NULL, 350.00, 15, 'bouquets', '🌹', 'new', '2026-05-05 03:41:04', NULL),
+(2, 2, 'Woven basket', NULL, 220.00, 20, 'handicrafts', '🧺', NULL, '2026-05-05 03:41:04', NULL),
+(3, 1, 'Sunflower wrap', NULL, 280.00, 12, 'bouquets', '🌻', NULL, '2026-05-05 03:41:04', NULL),
+(4, 2, 'Macramé decor', NULL, 450.00, 8, 'handicrafts', '🪴', NULL, '2026-05-05 03:41:04', NULL),
+(5, 1, 'Mixed blooms', NULL, 180.00, 5, 'flowers', '🌸', 'low', '2026-05-05 03:41:04', NULL),
+(6, 2, 'Gift hamper', NULL, 650.00, 10, 'giftsets', '🎁', 'new', '2026-05-05 03:41:04', NULL),
+(7, 1, 'Orchid arrangement', NULL, 520.00, 7, 'flowers', '🌺', NULL, '2026-05-05 03:41:04', NULL),
+(8, 1, 'Daisy bouquet', NULL, 210.00, 18, 'bouquets', '🌼', NULL, '2026-05-05 03:41:04', NULL),
+(9, 2, 'Beaded keychain', NULL, 95.00, 30, 'handicrafts', '📿', NULL, '2026-05-05 03:41:04', NULL),
+(10, 2, 'Macramé wall art', NULL, 450.00, 6, 'handicrafts', '🎨', NULL, '2026-05-05 03:41:04', NULL),
+(11, 1, 'Tulip bunch', NULL, 320.00, 14, 'flowers', '🌷', 'new', '2026-05-05 03:41:04', NULL),
+(12, 2, 'Holiday gift set', NULL, 780.00, 9, 'giftsets', '🎀', NULL, '2026-05-05 03:41:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,8 @@ INSERT INTO `users` (`id`, `fullname`, `email`, `username`, `password`, `role`, 
 (2, 'Maria Reyes', 'maria@email.com', 'maria_r', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'customer', '2026-05-05 03:41:04'),
 (3, 'Juan Dela Cruz', 'juan@email.com', 'juandc', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'seller', '2026-05-05 03:41:04'),
 (4, 'Ana Reyes', 'ana@email.com', 'ana_r', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'customer', '2026-05-05 03:41:04'),
-(5, 'elmerloepz', 'eslgPRSQ@gmail.com', 'elmerlopez', '$2y$10$HQz9UvJ6hAUZP.W73wqn5.pg6hhxgG/IQoATb.bJ26mUL5ijhKsc.', 'seller', '2026-05-05 03:48:53');
+(6, 'james', 'james@gmail.com', 'james', '$2y$10$IRYyNWjQCjrrdVuEo9V8sulosVTtiBrodxfcP7dG3zWEAVrq3WDTu', 'seller', '2026-05-06 06:39:22'),
+(12, 'taburnok', 'taburnok@gmail.com', 'tabs', '$2y$10$iUYUKM3Y7OnGZxAJKUi0H.T5jSbWK/SK7g3RMHdNN6v0QyqV5S9Sa', 'customer', '2026-05-16 11:41:38');
 
 -- --------------------------------------------------------
 
@@ -152,7 +154,7 @@ CREATE TABLE `vendors` (
 INSERT INTO `vendors` (`id`, `user_id`, `shop_name`, `shop_type`, `city`, `description`, `status`, `created_at`) VALUES
 (1, 3, 'Rosalinda Flowers', 'Florist', 'Davao City', NULL, 'approved', '2026-05-05 03:41:04'),
 (2, 3, 'Artisan Crafts PH', 'Handicrafts', 'Davao City', NULL, 'approved', '2026-05-05 03:41:04'),
-(3, 5, 'yongyongshop', 'Florist', 'Davao City', 'gege', 'approved', '2026-05-05 03:52:43');
+(4, 6, 'taburnok shop', 'Bouquet Maker', 'Davao City', 'taburnok flower for sale', 'approved', '2026-05-06 06:55:27');
 
 -- --------------------------------------------------------
 
@@ -176,8 +178,7 @@ CREATE TABLE `vendor_payments` (
 --
 
 INSERT INTO `vendor_payments` (`id`, `user_id`, `payment_method`, `reference_no`, `account_name`, `amount`, `status`, `created_at`) VALUES
-(1, 5, 'gcash', '123446', 'Elmerlopez', 299.00, 'pending', '2026-05-05 04:08:04'),
-(2, 5, 'gcash', '123124', 'Elmerlopez', 299.00, 'pending', '2026-05-05 04:09:06');
+(3, 6, 'gcash', '1234567', 'taburnok_1', 299.00, 'pending', '2026-05-06 06:55:55');
 
 -- --------------------------------------------------------
 
@@ -287,19 +288,19 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `vendor_payments`
 --
 ALTER TABLE `vendor_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `wishlist`

@@ -202,5 +202,6 @@ function setCategory(cat){
   document.getElementById('filterForm').submit();
 }
 </script>
+<?php include __DIR__.'/partials/chatbot_widget.php'; ?>
 </body>
 </html>
