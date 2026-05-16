@@ -106,7 +106,7 @@ $role = $_SESSION['role'];
       Your cart and wishlist will be preserved.
     </p>
 
-    <a href="logout.php?confirm=1" class="btn-confirm">Yes, log me out</a>
+    <a href="logout.php?confirm=1" class="btn-confirm" onclick="sessionStorage.removeItem('floraMessages')">Yes, log me out</a>
     <a href="logout.php?cancel=1" class="btn-cancel">← Stay logged in</a>
   </div>
 </div>

@@ -226,8 +226,35 @@ function sendQuick(msg){
     sendFloraMessage();
 }
 
+let floraIsTyping = false;
+
+// Save messages to sessionStorage
+function saveMessages(){
+    const messages = document.getElementById('floraChatMessages');
+    sessionStorage.setItem('floraMessages', messages.innerHTML);
+}
+
+// Load messages from sessionStorage
+function loadMessages(){
+    const saved = sessionStorage.getItem('floraMessages');
+    if(saved){
+        document.getElementById('floraChatMessages').innerHTML = saved;
+        // Hide quick replies if there are already messages
+        document.getElementById('floraQuickReplies').style.display = 'none';
+        // Scroll to bottom
+        const messages = document.getElementById('floraChatMessages');
+        messages.scrollTop = messages.scrollHeight;
+    }
+}
+
+// Load saved messages when page loads
+window.addEventListener('load', loadMessages);
+
 function sendFloraMessage(){
+    if(floraIsTyping) return;
+
     const input = document.getElementById('floraChatInput');
+    const sendBtn = document.querySelector('.flora-chat-input button');
     const msg = input.value.trim();
     if(!msg) return;
 
@@ -238,8 +265,25 @@ function sendFloraMessage(){
     appendMessage(msg, 'user');
     input.value = '';
 
+    // Save messages after user sends
+    saveMessages();
+
+    // Disable input while Flora is typing
+    floraIsTyping = true;
+    input.disabled = true;
+    input.placeholder = 'Flora is typing...';
+    sendBtn.disabled = true;
+    sendBtn.style.opacity = '0.5';
+
     // Show typing indicator
-    const typingId = appendMessage('Flora is typing...', 'typing');
+    const typingId = 'flora-typing-' + Date.now();
+    const messages = document.getElementById('floraChatMessages');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'flora-msg typing';
+    typingDiv.id = typingId;
+    typingDiv.textContent = 'Flora is typing...';
+    messages.appendChild(typingDiv);
+    messages.scrollTop = messages.scrollHeight;
 
     // Send to backend
     fetch('../chatbot.php', {
@@ -249,12 +293,25 @@ function sendFloraMessage(){
     })
     .then(r => r.json())
     .then(data => {
-        removeMessage(typingId);
+        const el = document.getElementById(typingId);
+        if(el) el.remove();
         appendMessage(data.reply || "I'm sorry, I couldn't process your request. Please try again! 🌸", 'bot');
+        // Save messages after Flora replies
+        saveMessages();
     })
     .catch(err => {
-        removeMessage(typingId);
+        const el = document.getElementById(typingId);
+        if(el) el.remove();
         appendMessage("Sorry, I'm having trouble connecting. Please try again! 🌸", 'bot');
+        saveMessages();
+    })
+    .finally(() => {
+        floraIsTyping = false;
+        input.disabled = false;
+        input.placeholder = 'Type your message...';
+        sendBtn.disabled = false;
+        sendBtn.style.opacity = '1';
+        input.focus();
     });
 }
 
@@ -268,10 +325,5 @@ function appendMessage(text, type){
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
     return id;
-}
-
-function removeMessage(id){
-    const el = document.getElementById(id);
-    if(el) el.remove();
 }
 </script>
